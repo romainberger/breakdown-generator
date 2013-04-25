@@ -1,1 +1,1 @@
-body{padding:0;margin:0}.wrapper{width:1000px;margin:0 auto}.hidden{display:none}
+body{padding:0;margin:0;font-family:Helvetica, sans-serif;background:#efefef}.wrapper{width:1000px;margin:0 auto}.center{text-align:center}button{display:block;width:100px;height:25px;margin:0 auto;border:0;color:#fff;background:#999;cursor:pointer}button:hover{background:#222}.hidden{display:none}

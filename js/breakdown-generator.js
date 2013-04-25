@@ -58,12 +58,16 @@
         self.loadSample(self.kick, function(sample) {
           self.kick = sample
 
-          self.loadSample(self.guitar, function(sample) {
-            self.guitar = sample
+          self.loadSample(self.guitarMute, function(sample) {
+            self.guitarMute = sample
 
             self.loadSample(self.china, function(sample) {
               self.china = sample
-              self.displayReady()
+
+              self.loadSample(self.guitarPlain, function(sample) {
+                self.guitarPlain = sample
+                self.displayReady()
+              })
             })
           })
         })
@@ -101,14 +105,29 @@
         // skip some kick
         var really = (Math.random() * 9 + 4) / 10
         var reallyReally = Math.random() < really ? true : false
-        reallyReally && self.playRandom(randKick)
+        reallyReally && self.playRandom()
       }, randKick)
       setTimeout(function() {
         clearInterval(randInt)
       }, timePlaying * 1000)
 
       for (bar = 0; bar < nbrOfBar; bar++) {
-        time = startTime + bar * 8 * eighthNoteTime;
+        time = startTime + bar * 8 * eighthNoteTime
+
+        // the random kick / guitar stuff
+        // nevers plays on the first beat so we add
+        // it here. Sometimes.
+        var firstBeat = Math.random() > .5 ? true : false
+          , mute = Math.random() > .5 ? true : false
+        if (firstBeat) {
+          self.readSound(self.kick, 0)
+          if (mute) {
+            self.readSound(self.guitarMute, 0)
+          }
+          else {
+            self.readSound(self.guitarPlain, 0)
+          }
+        }
 
         // Snare on beats 3, 7
         self.readSound(self.snare, time + 2 * eighthNoteTime)
@@ -124,17 +143,17 @@
     }
 
     // play the kick and guitar samples
-  , playRandom: function(rand) {
+  , playRandom: function() {
       this.readSound(this.kick, 0)
 
-      // // do we play the mute or plain version ?
-      // mute = Math.random() < .5 ? true : false
-      // if (mute) {
-      //   this.readSound(this.guitarMute)
-      // }
-      // else {
-      //   this.readSound(this.guitarPlain)
-      // }
+      // do we play the mute or plain version ?
+      var mute = Math.random() < .9 ? true : false
+      if (mute) {
+        this.readSound(this.guitarMute)
+      }
+      else {
+        this.readSound(this.guitarPlain)
+      }
     }
 
     // Cheap way to tell the user
