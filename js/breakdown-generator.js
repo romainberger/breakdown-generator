@@ -12,7 +12,8 @@
     this.snare = 'drums/snare.mp3'
     this.kick = 'drums/kick.mp3'
     this.china = 'drums/china.mp3'
-    this.guitar = 'guitar/e.mp3'
+    this.guitarMute = 'guitar/mute.mp3'
+    this.guitarPlain = 'guitar/plain.mp3'
   }
 
   App.prototype = {
@@ -83,15 +84,31 @@
         , nbrOfBar = 2
         , time
         , i
-        , startTime = this.context.currentTime+0.100
+        , startTime = this.context.currentTime + 0.100
         , tempo = parseInt($('#tempo').val())
         , eighthNoteTime = (60 / tempo) / 2
+        // random magic
+        , randStart = Math.floor(Math.random() * 100) + 25
+        , randEnd = Math.floor(Math.random() * 240) + 120
+        , randKick = Math.floor(Math.random() * randEnd) + randStart
+        , randInt
+        , timePlaying = 120 / tempo * nbrOfBar * 2
+
+      // Randomly call the kick / guitar function
+      // really ugly there is probably
+      // a better way to do this
+      randInt = setInterval(function() {
+        // skip some kick
+        var really = (Math.random() * 9 + 4) / 10
+        var reallyReally = Math.random() < really ? true : false
+        reallyReally && self.playRandom(randKick)
+      }, randKick)
+      setTimeout(function() {
+        clearInterval(randInt)
+      }, timePlaying * 1000)
 
       for (bar = 0; bar < nbrOfBar; bar++) {
         time = startTime + bar * 8 * eighthNoteTime;
-        // Kick on beats 1, 5
-        self.readSound(self.kick, time)
-        self.readSound(self.kick, time + 4 * eighthNoteTime)
 
         // Snare on beats 3, 7
         self.readSound(self.snare, time + 2 * eighthNoteTime)
@@ -103,6 +120,21 @@
         self.readSound(self.china, time + 4 * eighthNoteTime)
         self.readSound(self.china, time + 6 * eighthNoteTime)
       }
+
+    }
+
+    // play the kick and guitar samples
+  , playRandom: function(rand) {
+      this.readSound(this.kick, 0)
+
+      // // do we play the mute or plain version ?
+      // mute = Math.random() < .5 ? true : false
+      // if (mute) {
+      //   this.readSound(this.guitarMute)
+      // }
+      // else {
+      //   this.readSound(this.guitarPlain)
+      // }
     }
 
     // Cheap way to tell the user
