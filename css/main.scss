@@ -1,4 +1,8 @@
 
+/** Variables **/
+$wrapperWidth: 1000px;
+
+/** General **/
 * { zoom: 1}
 html {
     font-size: 100%;
@@ -12,33 +16,56 @@ body {
 }
 
 .wrapper {
-    width: 1000px;
+    width: $wrapperWidth;
     margin: 0 auto;
 }
 
 .center {
     text-align: center
 }
+.hidden {
+    display: none;
+}
+.warning {
+    color: #f33
+}
+
+/** App **/
+.app {
+    margin-top: 50px;
+}
 button {
     display: block;
-    width: 100px;
+    width: 150px;
     height: 25px;
     margin: 0 auto;
     border: 0;
     color: #fff;
     background: #999;
     cursor: pointer;
+    font-family: inherit;
+    text-transform: uppercase;
 }
 button:hover {
     background: #222
 }
 
-.hidden { display: none; }
-.warning {
-    color: #f33
-}
 
 .old-crap {
     margin-top: 70px;
     font-size: 20px;
+}
+
+/** Footer **/
+footer {
+    width: $wrapperWidth;
+    margin: 200px auto 0 auto;
+}
+.disclaimer {
+    width: 200px;
+    float: left;
+    font-size: 12px;
+}
+.credits {
+    float: right;
 }

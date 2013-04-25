@@ -1,4 +1,9 @@
-/*! Breakdown Generator */
+/**
+ * Breakdown Generator
+ * https://github.com/romainberger/breakdown-generator
+ *
+ * @author Romain Berger <romain@romainberger.com>
+ */
 
 !function($) {
 
@@ -48,7 +53,7 @@
     // Load the samples and store them
     // sooooo ugly
     // but I am lazy I'll refactor later
-    // I promise. no pun intended
+    // I promise (no pun intended)
   , loadSamples: function() {
       var self = this
 
@@ -75,6 +80,7 @@
       })
     }
 
+    // Plays a sound
   , readSound: function(sample, time) {
       var sound = this.context.createBufferSource()
       var soundBuffer = this.context.createBuffer(sample, false)
@@ -83,6 +89,7 @@
       sound.noteOn(time)
     }
 
+    // That where the buziness happens
   , play: function() {
       var self = this
         , bar
