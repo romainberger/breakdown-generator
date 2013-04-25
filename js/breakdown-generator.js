@@ -62,7 +62,7 @@
 
             self.loadSample(self.china, function(sample) {
               self.china = sample
-              self.play()
+              self.displayReady()
             })
           })
         })
@@ -80,13 +80,14 @@
   , play: function() {
       var self = this
         , bar
+        , nbrOfBar = 2
         , time
         , i
         , startTime = this.context.currentTime+0.100
-        , tempo = 80
+        , tempo = parseInt($('#tempo').val())
         , eighthNoteTime = (60 / tempo) / 2
 
-      for (bar = 0; bar < 2; bar++) {
+      for (bar = 0; bar < nbrOfBar; bar++) {
         time = startTime + bar * 8 * eighthNoteTime;
         // Kick on beats 1, 5
         self.readSound(self.kick, time)
@@ -104,10 +105,42 @@
       }
     }
 
+    // Cheap way to tell the user
+    // everything is ready
+  , displayReady: function() {
+      loading.hide()
+      playButton.show()
+    }
+
+  , showPlaying: function() {
+      playButton.hide()
+      playingText.show()
+    }
+
+  , donePlaying: function() {
+      playingText.hide()
+      playButton.show()
+    }
+
   }
 
 
   var app = new App
-  app.init()
+    , loading
+    , playButton
+    , playingText
+
+  $(document).ready(function() {
+
+    loading = $('#loading')
+    playButton = $('#play')
+    playingText = $('#playing')
+    app.init()
+
+    playButton.click(function() {
+      app.play()
+    })
+
+  })
 
 }(window.jQuery);
