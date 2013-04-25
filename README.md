@@ -10,5 +10,5 @@ When I am not coding, I am playing music. Like every developer I try to automate
 
 Some ideas that would be cool to implement:
 
-    * record the audio to export
-    * MIDI file of the riff
+* record the audio to export
+* MIDI file of the riff
