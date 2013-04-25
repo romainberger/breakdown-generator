@@ -19,12 +19,17 @@
 
         <p class="center"><span class="warning">Warning</span>: The "music" you will hear will probably be the worst thing you've heard (except Justin Bieber of course). This is some randomly generated notes and sometimes it goes nuts.</p>
 
-        <p class="center"><label for="tempo">Tempo: </label><input id="tempo" type="text" value="80"></p>
-        <p class="center">
-            <span id="loading">Loading</span>
-            <span class="hidden">Playing...</span>
-            <button id="play" class="hidden">Play</button>
-        </p>
+        <div id="app">
+            <p class="center"><label for="tempo">Tempo: </label><input id="tempo" type="text" value="80"></p>
+            <p class="center">
+                <span id="loading">Loading</span>
+                <span class="hidden">Playing...</span>
+                <button id="play" class="hidden">Play</button>
+            </p>
+        </div>
+        <div id="old-crap" class="hidden center old-crap">
+            <p>You are using an old browser (or a browser that just suck) and it can't run this application. <a href="http://google.com/chrome">Go get a real one then come back</a>.</p>
+        </div>
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>

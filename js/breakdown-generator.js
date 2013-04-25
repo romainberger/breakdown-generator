@@ -27,7 +27,8 @@
         this.context = new webkitAudioContext()
       }
       else {
-          throw new Error('Go get a real browser dude')
+        $('#app').hide()
+        oldCrap.show()
       }
 
       this.context && this.loadSamples()
@@ -180,12 +181,14 @@
     , loading
     , playButton
     , playingText
+    , oldCrap
 
   $(document).ready(function() {
 
-    loading = $('#loading')
-    playButton = $('#play')
+    loading     = $('#loading')
+    playButton  = $('#play')
     playingText = $('#playing')
+    oldCrap     = $('#old-crap')
     app.init()
 
     playButton.click(function() {

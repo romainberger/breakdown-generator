@@ -1,9 +1,14 @@
 
+* { zoom: 1}
+html {
+    font-size: 100%;
+}
 body {
     padding: 0;
     margin: 0;
     font-family: Helvetica, sans-serif;
-    background: #efefef
+    line-height: 1.4;
+    background: #efefef;
 }
 
 .wrapper {
@@ -31,4 +36,9 @@ button:hover {
 .hidden { display: none; }
 .warning {
     color: #f33
+}
+
+.old-crap {
+    margin-top: 70px;
+    font-size: 20px;
 }
