@@ -10,5 +10,7 @@ When I am not coding, I am playing music. Like every developer I try to automate
 
 Some ideas that would be cool to implement:
 
+* Record the sequence to be able to play the riff again
+* mix console for volume of each instruments
 * record the audio to export
 * MIDI file of the riff
