@@ -19,6 +19,12 @@
     this.china = 'drums/china.mp3'
     this.guitarMute = 'guitar/mute.mp3'
     this.guitarPlain = 'guitar/plain.mp3'
+
+    this.riff = {
+        snare: [2, 6]
+      , china: [0, 2, 4, 6]
+      , kick: []
+    }
   }
 
   App.prototype = {
@@ -83,7 +89,7 @@
     // Plays a sound
   , readSound: function(sample, time) {
       var sound = this.context.createBufferSource()
-      var soundBuffer = this.context.createBuffer(sample, false)
+        , soundBuffer = this.context.createBuffer(sample, false)
       sound.buffer = soundBuffer
       sound.connect(this.context.destination)
       sound.noteOn(time)
@@ -109,15 +115,43 @@
       // Randomly call the kick / guitar function
       // really ugly there is probably
       // a better way to do this
-      randInt = setInterval(function() {
-        // skip some kick
-        var really = (Math.random() * 9 + 4) / 10
-        var reallyReally = Math.random() < really ? true : false
-        reallyReally && self.playRandom()
-      }, randKick)
-      setTimeout(function() {
-        clearInterval(randInt)
-      }, timePlaying * 1000)
+      // randInt = setInterval(function() {
+      //   // skip some kick
+      //   var really = (Math.random() * 9 + 4) / 10
+      //     , reallyReally = Math.random() < really ? true : false
+      //   reallyReally && self.playRandom()
+      // }, randKick)
+      // setTimeout(function() {
+      //   clearInterval(randInt)
+      // }, timePlaying * 1000)
+
+      time = startTime + 1 * 8 * eighthNoteTime
+
+      this.riff.snare.forEach(function(beat) {
+        self.readSound(self.snare, time + parseInt(beat) * eighthNoteTime)
+      })
+
+      this.riff.china.forEach(function(beat) {
+        self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
+      })
+
+      // // random kick
+      // var nbrOfKick = Math.floor(Math.random() * 12) + 4
+      // for (var i = 0; i < nbrOfKick; i++) {
+      //   var beat = Math.floor(Math.random() * 12)
+      //   // avoid duplicates
+      //   if (this.riff.kick.indexOf(beat) == -1) {
+      //     this.riff.kick.push(beat)
+      //   }
+      // }
+
+      // this.riff.kick.forEach(function(beat) {
+      //    self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
+      // })
+
+      // console.log(this.riff)
+
+      return
 
       for (bar = 0; bar < nbrOfBar; bar++) {
         time = startTime + bar * 8 * eighthNoteTime
