@@ -51,32 +51,31 @@
     }
 
     // Load the samples and store them
-    // sooooo ugly
-    // but I am lazy I'll refactor later
-    // I promise (no pun intended)
   , loadSamples: function() {
       var self = this
 
-      // CALLBACK HELL !!!
-      self.loadSample(self.snare, function(sample) {
-        self.snare = sample
-
-        self.loadSample(self.kick, function(sample) {
-          self.kick = sample
-
-          self.loadSample(self.guitarMute, function(sample) {
-            self.guitarMute = sample
-
-            self.loadSample(self.china, function(sample) {
-              self.china = sample
-
-              self.loadSample(self.guitarPlain, function(sample) {
-                self.guitarPlain = sample
-                self.displayReady()
-              })
-            })
+      $.when(
+          self.loadSample(self.snare, function(sample) {
+            self.snare = sample
           })
-        })
+        , self.loadSample(self.kick, function(sample) {
+            self.kick = sample
+          })
+
+        , self.loadSample(self.guitarMute, function(sample) {
+            self.guitarMute = sample
+          })
+
+        , self.loadSample(self.china, function(sample) {
+            self.china = sample
+          })
+
+        , self.loadSample(self.guitarPlain, function(sample) {
+            self.guitarPlain = sample
+          })
+      )
+      .then(function() {
+        self.displayReady()
       })
     }
 
