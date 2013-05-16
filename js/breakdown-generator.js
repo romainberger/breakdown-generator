@@ -127,6 +127,17 @@
 
       time = startTime + 1 * 8 * eighthNoteTime
 
+      // random kick
+      var nbrOfKick = Math.floor(Math.random() * 12) + 4
+      for (var i = 0; i < nbrOfKick; i++) {
+        var beat = Math.floor(Math.random() * 9)
+        // avoid duplicates
+        if (this.riff.kick.indexOf(beat) == -1) {
+          this.riff.kick.push(beat)
+        }
+      }
+
+      // play riff
       this.riff.snare.forEach(function(beat) {
         self.readSound(self.snare, time + parseInt(beat) * eighthNoteTime)
       })
@@ -135,19 +146,9 @@
         self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
       })
 
-      // // random kick
-      // var nbrOfKick = Math.floor(Math.random() * 12) + 4
-      // for (var i = 0; i < nbrOfKick; i++) {
-      //   var beat = Math.floor(Math.random() * 12)
-      //   // avoid duplicates
-      //   if (this.riff.kick.indexOf(beat) == -1) {
-      //     this.riff.kick.push(beat)
-      //   }
-      // }
-
-      // this.riff.kick.forEach(function(beat) {
-      //    self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
-      // })
+      this.riff.kick.forEach(function(beat) {
+         self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
+      })
 
       // console.log(this.riff)
 
