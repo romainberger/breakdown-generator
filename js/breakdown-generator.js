@@ -105,25 +105,6 @@
         , startTime = this.context.currentTime + 0.100
         , tempo = parseInt($('#tempo').val())
         , eighthNoteTime = (60 / tempo) / 2
-        // random magic
-        , randStart = Math.floor(Math.random() * 100) + 25
-        , randEnd = Math.floor(Math.random() * 240) + 120
-        , randKick = Math.floor(Math.random() * randEnd) + randStart
-        , randInt
-        , timePlaying = 120 / tempo * nbrOfBar * 2
-
-      // Randomly call the kick / guitar function
-      // really ugly there is probably
-      // a better way to do this
-      // randInt = setInterval(function() {
-      //   // skip some kick
-      //   var really = (Math.random() * 9 + 4) / 10
-      //     , reallyReally = Math.random() < really ? true : false
-      //   reallyReally && self.playRandom()
-      // }, randKick)
-      // setTimeout(function() {
-      //   clearInterval(randInt)
-      // }, timePlaying * 1000)
 
       time = startTime + 1 * 8 * eighthNoteTime
 
@@ -146,14 +127,14 @@
         self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
       })
 
+      // @todo use the playRandom() method
       this.riff.kick.forEach(function(beat) {
          self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
       })
 
-      // console.log(this.riff)
-
       return
 
+      // old stuff
       for (bar = 0; bar < nbrOfBar; bar++) {
         time = startTime + bar * 8 * eighthNoteTime
 
@@ -233,6 +214,9 @@
     oldCrap     = $('#old-crap')
     app.init()
 
+    // @todo create button to generate a riff
+    // and another button to play it
+    // display riff (midi ?)
     playButton.click(function() {
       app.play()
     })
