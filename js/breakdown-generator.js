@@ -191,23 +191,6 @@
       }
     }
 
-    // Cheap way to tell the user
-    // everything is ready
-  , displayReady: function() {
-      // loading.hide()
-      // playButton.show()
-    }
-
-  , showPlaying: function() {
-      // playButton.hide()
-      // playingText.show()
-    }
-
-  , donePlaying: function() {
-      // playingText.hide()
-      // playButton.show()
-    }
-
   }
 
 
