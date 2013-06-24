@@ -8,6 +8,7 @@
     var generator  = new BreakdownGenerator
       , playButton = $('#play')
       , loading    = $('#loading')
+      , generateRiff = $('#generate-riff')
 
     generator.init(function(err) {
       if (err) {
@@ -18,6 +19,7 @@
       // display the play button once everything is loaded
       loading.hide()
       playButton.show()
+      generateRiff.show()
 
       // set tempo
       $('#tempo').change(function() {

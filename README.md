@@ -54,7 +54,6 @@ Then go crazy.
         // then play it
         $.proxy(generator.play(), generator)
     })
-
 ```
 
 ### Method

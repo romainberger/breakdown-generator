@@ -108,6 +108,8 @@
 
     // Generate randoms kick/guitar notes
   , generateRiff: function() {
+      // remove previous datas
+      this.riff.kick = []
       // random kick
       var nbrOfKick = Math.floor(Math.random() * 12) + 4
       for (var i = 0; i < nbrOfKick; i++) {
