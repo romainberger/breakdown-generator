@@ -5,11 +5,11 @@
  * @author Romain Berger <romain@romainberger.com>
  */
 
-!function($) {
+!function() {
 
   'use strict'
 
-  var App = function() {
+  var BreakdownGenerator = function(options) {
     this.context = false
     // stores the url to the samples
     // once the files are load they
@@ -19,12 +19,21 @@
     this.china = 'drums/china.mp3'
     this.guitarMute = 'guitar/mute.mp3'
     this.guitarPlain = 'guitar/plain.mp3'
+
+    this.riff = {
+        snare: [2, 6]
+      , china: [0, 2, 4, 6]
+      , kick: []
+    }
+
+    options = typeof options == 'object' ? options : {}
+    this.tempo = options.tempo || 100
   }
 
-  App.prototype = {
+  BreakdownGenerator.prototype = {
 
     // Creates the audio context
-    init: function() {
+    init: function(cb) {
       if (typeof AudioContext !== 'undefined') {
         this.context = new AudioContext()
       }
@@ -32,11 +41,19 @@
         this.context = new webkitAudioContext()
       }
       else {
-        $('#app').hide()
-        oldCrap.show()
+        return cb(true)
       }
 
-      this.context && this.loadSamples()
+      this.context && this.loadSamples(cb)
+    }
+
+  , ready: function(cb) {
+      cb()
+    }
+
+  , setTempo: function(tempo) {
+      if (isNaN(tempo)) return
+      this.tempo = tempo || 100
     }
 
     // Load a sample
@@ -54,7 +71,7 @@
     // sooooo ugly
     // but I am lazy I'll refactor later
     // I promise (no pun intended)
-  , loadSamples: function() {
+  , loadSamples: function(cb) {
       var self = this
 
       // CALLBACK HELL !!!
@@ -72,7 +89,7 @@
 
               self.loadSample(self.guitarPlain, function(sample) {
                 self.guitarPlain = sample
-                self.displayReady()
+                self.ready(cb)
               })
             })
           })
@@ -83,7 +100,7 @@
     // Plays a sound
   , readSound: function(sample, time) {
       var sound = this.context.createBufferSource()
-      var soundBuffer = this.context.createBuffer(sample, false)
+        , soundBuffer = this.context.createBuffer(sample, false)
       sound.buffer = soundBuffer
       sound.connect(this.context.destination)
       sound.noteOn(time)
@@ -97,28 +114,38 @@
         , time
         , i
         , startTime = this.context.currentTime + 0.100
-        , tempo = parseInt($('#tempo').val())
+        , tempo = this.tempo
         , eighthNoteTime = (60 / tempo) / 2
-        // random magic
-        , randStart = Math.floor(Math.random() * 100) + 25
-        , randEnd = Math.floor(Math.random() * 240) + 120
-        , randKick = Math.floor(Math.random() * randEnd) + randStart
-        , randInt
-        , timePlaying = 120 / tempo * nbrOfBar * 2
 
-      // Randomly call the kick / guitar function
-      // really ugly there is probably
-      // a better way to do this
-      randInt = setInterval(function() {
-        // skip some kick
-        var really = (Math.random() * 9 + 4) / 10
-        var reallyReally = Math.random() < really ? true : false
-        reallyReally && self.playRandom()
-      }, randKick)
-      setTimeout(function() {
-        clearInterval(randInt)
-      }, timePlaying * 1000)
+      time = startTime + 1 * 8 * eighthNoteTime
 
+      // random kick
+      var nbrOfKick = Math.floor(Math.random() * 12) + 4
+      for (var i = 0; i < nbrOfKick; i++) {
+        var beat = Math.floor(Math.random() * 9)
+        // avoid duplicates
+        if (this.riff.kick.indexOf(beat) == -1) {
+          this.riff.kick.push(beat)
+        }
+      }
+
+      // play riff
+      this.riff.snare.forEach(function(beat) {
+        self.readSound(self.snare, time + parseInt(beat) * eighthNoteTime)
+      })
+
+      this.riff.china.forEach(function(beat) {
+        self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
+      })
+
+      // @todo use the playRandom() method
+      this.riff.kick.forEach(function(beat) {
+         self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
+      })
+
+      return
+
+      // old stuff
       for (bar = 0; bar < nbrOfBar; bar++) {
         time = startTime + bar * 8 * eighthNoteTime
 
@@ -164,44 +191,11 @@
       }
     }
 
-    // Cheap way to tell the user
-    // everything is ready
-  , displayReady: function() {
-      loading.hide()
-      playButton.show()
-    }
-
-  , showPlaying: function() {
-      playButton.hide()
-      playingText.show()
-    }
-
-  , donePlaying: function() {
-      playingText.hide()
-      playButton.show()
-    }
-
   }
 
 
-  var app = new App
-    , loading
-    , playButton
-    , playingText
-    , oldCrap
+  if (typeof window != 'undefined') {
+    window.BreakdownGenerator = BreakdownGenerator
+  }
 
-  $(document).ready(function() {
-
-    loading     = $('#loading')
-    playButton  = $('#play')
-    playingText = $('#playing')
-    oldCrap     = $('#old-crap')
-    app.init()
-
-    playButton.click(function() {
-      app.play()
-    })
-
-  })
-
-}(window.jQuery);
+}();
