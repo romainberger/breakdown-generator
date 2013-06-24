@@ -19,15 +19,20 @@
       loading.hide()
       playButton.show()
 
-      // and play!
-      playButton.click(function() {
-        $.proxy(generator.play(), generator)
-      })
-
       // set tempo
       $('#tempo').change(function() {
         var tempo = $(this).val()
         $.proxy(generator.setTempo(tempo), generator)
+      })
+
+      // generate riff
+      generateRiff.click(function() {
+        $.proxy(generator.generateRiff(), generator)
+      })
+
+      // and play!
+      playButton.click(function() {
+        $.proxy(generator.play(), generator)
       })
 
     })

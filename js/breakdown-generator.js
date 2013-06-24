@@ -106,6 +106,19 @@
       sound.noteOn(time)
     }
 
+    // Generate randoms kick/guitar notes
+  , generateRiff: function() {
+      // random kick
+      var nbrOfKick = Math.floor(Math.random() * 12) + 4
+      for (var i = 0; i < nbrOfKick; i++) {
+        var beat = Math.floor(Math.random() * 9)
+        // avoid duplicates
+        if (this.riff.kick.indexOf(beat) == -1) {
+          this.riff.kick.push(beat)
+        }
+      }
+    }
+
     // That where the buziness happens
   , play: function() {
       var self = this
@@ -118,16 +131,6 @@
         , eighthNoteTime = (60 / tempo) / 2
 
       time = startTime + 1 * 8 * eighthNoteTime
-
-      // random kick
-      var nbrOfKick = Math.floor(Math.random() * 12) + 4
-      for (var i = 0; i < nbrOfKick; i++) {
-        var beat = Math.floor(Math.random() * 9)
-        // avoid duplicates
-        if (this.riff.kick.indexOf(beat) == -1) {
-          this.riff.kick.push(beat)
-        }
-      }
 
       // play riff
       this.riff.snare.forEach(function(beat) {
