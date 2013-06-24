@@ -5,11 +5,11 @@
  * @author Romain Berger <romain@romainberger.com>
  */
 
-!function($) {
+!function() {
 
   'use strict'
 
-  var App = function() {
+  var BreakdownGenerator = function(options) {
     this.context = false
     // stores the url to the samples
     // once the files are load they
@@ -25,12 +25,15 @@
       , china: [0, 2, 4, 6]
       , kick: []
     }
+
+    options = typeof options == 'object' ? options : {}
+    this.tempo = options.tempo || 100
   }
 
-  App.prototype = {
+  BreakdownGenerator.prototype = {
 
     // Creates the audio context
-    init: function() {
+    init: function(cb) {
       if (typeof AudioContext !== 'undefined') {
         this.context = new AudioContext()
       }
@@ -38,11 +41,19 @@
         this.context = new webkitAudioContext()
       }
       else {
-        $('#app').hide()
-        oldCrap.show()
+        return cb(true)
       }
 
-      this.context && this.loadSamples()
+      this.context && this.loadSamples(cb)
+    }
+
+  , ready: function(cb) {
+      cb()
+    }
+
+  , setTempo: function(tempo) {
+      if (isNaN(tempo)) return
+      this.tempo = tempo || 100
     }
 
     // Load a sample
@@ -60,7 +71,7 @@
     // sooooo ugly
     // but I am lazy I'll refactor later
     // I promise (no pun intended)
-  , loadSamples: function() {
+  , loadSamples: function(cb) {
       var self = this
 
       // CALLBACK HELL !!!
@@ -78,7 +89,7 @@
 
               self.loadSample(self.guitarPlain, function(sample) {
                 self.guitarPlain = sample
-                self.displayReady()
+                self.ready(cb)
               })
             })
           })
@@ -103,7 +114,7 @@
         , time
         , i
         , startTime = this.context.currentTime + 0.100
-        , tempo = parseInt($('#tempo').val())
+        , tempo = this.tempo
         , eighthNoteTime = (60 / tempo) / 2
 
       time = startTime + 1 * 8 * eighthNoteTime
@@ -183,44 +194,25 @@
     // Cheap way to tell the user
     // everything is ready
   , displayReady: function() {
-      loading.hide()
-      playButton.show()
+      // loading.hide()
+      // playButton.show()
     }
 
   , showPlaying: function() {
-      playButton.hide()
-      playingText.show()
+      // playButton.hide()
+      // playingText.show()
     }
 
   , donePlaying: function() {
-      playingText.hide()
-      playButton.show()
+      // playingText.hide()
+      // playButton.show()
     }
 
   }
 
 
-  var app = new App
-    , loading
-    , playButton
-    , playingText
-    , oldCrap
+  if (typeof window != 'undefined') {
+    window.BreakdownGenerator = BreakdownGenerator
+  }
 
-  $(document).ready(function() {
-
-    loading     = $('#loading')
-    playButton  = $('#play')
-    playingText = $('#playing')
-    oldCrap     = $('#old-crap')
-    app.init()
-
-    // @todo create button to generate a riff
-    // and another button to play it
-    // display riff (midi ?)
-    playButton.click(function() {
-      app.play()
-    })
-
-  })
-
-}(window.jQuery);
+}();
