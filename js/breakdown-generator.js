@@ -196,6 +196,12 @@
       }
     }
 
+  , getJson: function() {
+      var riff = JSON.stringify(this.riff)
+      console.log(riff)
+      // return riff
+    }
+
   }
 
 
