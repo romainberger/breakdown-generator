@@ -67,13 +67,15 @@ Then go crazy.
 
     // Set the generator's tempo
     generator.setTempo(120)
+
+    // get the riff as JSON
+    var riffJson = generator.getJson()
 ```
 
 ## Improvements
 
 Some ideas that would be cool to implement:
 
-* Record the sequence to be able to play the riff again
 * mix console for volume of each instruments
 * record the audio to export
 * MIDI file of the riff

@@ -29,6 +29,7 @@
     // generate riff
     generateRiff.addEventListener('click', function() {
       playButton.style.display = 'block'
+      getRiff.style.display = 'block'
       generator.generateRiff.call(generator)
     })
 
@@ -39,7 +40,7 @@
 
     // get the riff as json
     getRiff.addEventListener('click', function() {
-      generator.getJson.call(generator)
+      console.log(generator.getJson.call(generator))
     })
 
   })

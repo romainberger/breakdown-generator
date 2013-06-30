@@ -143,61 +143,21 @@
 
       // @todo use the playRandom() method
       this.riff.kick.forEach(function(beat) {
-         self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
-      })
+        self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
 
-      return
-
-      // old stuff
-      for (bar = 0; bar < nbrOfBar; bar++) {
-        time = startTime + bar * 8 * eighthNoteTime
-
-        // the random kick / guitar stuff
-        // nevers plays on the first beat so we add
-        // it here. Sometimes.
-        var firstBeat = Math.random() > .5 ? true : false
-          , mute = Math.random() > .5 ? true : false
-        if (firstBeat) {
-          self.readSound(self.kick, 0)
-          if (mute) {
-            self.readSound(self.guitarMute, 0)
-          }
-          else {
-            self.readSound(self.guitarPlain, 0)
-          }
+        // do we play the mute or plain version ?
+        var mute = Math.random() < .9 ? true : false
+        if (mute) {
+          self.readSound(self.guitarMute, time + parseInt(beat) * eighthNoteTime)
         }
-
-        // Snare on beats 3, 7
-        self.readSound(self.snare, time + 2 * eighthNoteTime)
-        self.readSound(self.snare, time + 6 * eighthNoteTime)
-
-        // China everyfuckingwhere
-        self.readSound(self.china, time)
-        self.readSound(self.china, time + 2 * eighthNoteTime)
-        self.readSound(self.china, time + 4 * eighthNoteTime)
-        self.readSound(self.china, time + 6 * eighthNoteTime)
-      }
-
-    }
-
-    // play the kick and guitar samples
-  , playRandom: function() {
-      this.readSound(this.kick, 0)
-
-      // do we play the mute or plain version ?
-      var mute = Math.random() < .9 ? true : false
-      if (mute) {
-        this.readSound(this.guitarMute)
-      }
-      else {
-        this.readSound(this.guitarPlain)
-      }
+        else {
+          self.readSound(self.guitarPlain, time + parseInt(beat) * eighthNoteTime)
+        }
+      })
     }
 
   , getJson: function() {
-      var riff = JSON.stringify(this.riff)
-      console.log(riff)
-      // return riff
+      return JSON.stringify(this.riff)
     }
 
   }
