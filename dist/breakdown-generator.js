@@ -23,7 +23,7 @@
     this.riff = {
         snare: [2, 6]
       , china: [0, 2, 4, 6]
-      , kick:  []
+      , kick: []
     }
 
     options = typeof options == 'object' ? options : {}
@@ -67,12 +67,14 @@
       request.send()
     }
 
+    // Load the samples and store them
     // sooooo ugly
     // but I am lazy I'll refactor later
     // I promise (no pun intended)
   , loadSamples: function(cb) {
       var self = this
 
+      // CALLBACK HELL !!!
       self.loadSample(self.snare, function(sample) {
         self.snare = sample
 
@@ -201,6 +203,7 @@
     }
 
   }
+
 
   if (typeof window != 'undefined') {
     window.BreakdownGenerator = BreakdownGenerator
