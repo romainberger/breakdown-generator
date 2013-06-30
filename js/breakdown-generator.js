@@ -21,9 +21,9 @@
     this.guitarPlain = 'guitar/plain.mp3'
 
     this.riff = {
-        snare: [2, 6]
-      , china: [0, 2, 4, 6]
-      , kick:  []
+        snare:  [2, 6]
+      , china:  [0, 2, 4, 6]
+      , kick:   []
     }
 
     options = typeof options == 'object' ? options : {}
@@ -117,6 +117,10 @@
           this.riff.kick.push(beat)
         }
       }
+      // sort the kick for pretty output
+      this.riff.kick.sort(function(a, b) {
+        return a - b
+      })
     }
 
     // That's where the buziness happens
@@ -141,7 +145,6 @@
         self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
       })
 
-      // @todo use the playRandom() method
       this.riff.kick.forEach(function(beat) {
         self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
 
