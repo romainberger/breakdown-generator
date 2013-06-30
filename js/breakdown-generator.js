@@ -23,7 +23,7 @@
     this.riff = {
         snare: [2, 6]
       , china: [0, 2, 4, 6]
-      , kick: []
+      , kick:  []
     }
 
     options = typeof options == 'object' ? options : {}
@@ -203,7 +203,6 @@
     }
 
   }
-
 
   if (typeof window != 'undefined') {
     window.BreakdownGenerator = BreakdownGenerator

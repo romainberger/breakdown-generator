@@ -18,17 +18,17 @@
 
     // display the play button once everything is loaded
     loading.style.display = 'none'
-    playButton.style.display = 'block'
     generateRiff.style.display = 'block'
 
     // set tempo
     tempoInput.addEventListener('change', function() {
-      var tempo = $(this).val()
+      var tempo = this.value
       generator.setTempo.call(generator, tempo)
     })
 
     // generate riff
     generateRiff.addEventListener('click', function() {
+      playButton.style.display = 'block'
       generator.generateRiff.call(generator)
     })
 
