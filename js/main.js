@@ -43,6 +43,11 @@
       console.log(generator.getJson.call(generator))
     })
 
+    // load a riff
+    // var riff = '{"snare":[2,6],"china":[0,2,4,6],"kick":[1,8,0,4,5,3,2]}'
+    // generator.loadRiff(riff)
+    // playButton.style.display = 'block'
+
   })
 
 }();

@@ -160,6 +160,17 @@
       return JSON.stringify(this.riff)
     }
 
+  , loadRiff: function(riff) {
+      try {
+        var riff = JSON.parse(riff)
+        this.riff = riff
+      }
+      catch(e) {
+        console.error('Breakdown Geneator: Invalid riff format. You need to use a JSON object')
+        console.error(e)
+      }
+    }
+
   }
 
   if (typeof window != 'undefined') {
