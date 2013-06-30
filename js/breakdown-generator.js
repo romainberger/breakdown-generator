@@ -24,6 +24,7 @@
         snare:  [2, 6]
       , china:  [0, 2, 4, 6]
       , kick:   []
+      , guitar: []
     }
 
     options = typeof options == 'object' ? options : {}
@@ -108,6 +109,8 @@
   , generateRiff: function() {
       // remove previous datas
       this.riff.kick = []
+      this.riff.guitar = []
+
       // random kick
       var nbrOfKick = Math.floor(Math.random() * 12) + 4
       for (var i = 0; i < nbrOfKick; i++) {
@@ -120,6 +123,19 @@
       // sort the kick for pretty output
       this.riff.kick.sort(function(a, b) {
         return a - b
+      })
+
+      // for each kick determines if we play open
+      // or muted chords
+      var self = this
+      this.riff.kick.forEach(function(g) {
+        var mute = Math.random() < .9 ? true : false
+        if (mute) {
+          self.riff.guitar.push(1)
+        }
+        else {
+          self.riff.guitar.push(0)
+        }
       })
     }
 
@@ -145,17 +161,19 @@
         self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
       })
 
+      var beatIndex = 0
       this.riff.kick.forEach(function(beat) {
         self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
 
-        // do we play the mute or plain version ?
-        var mute = Math.random() < .9 ? true : false
+        // play mute / open guitar
+        var mute = self.riff.guitar[beatIndex]
         if (mute) {
           self.readSound(self.guitarMute, time + parseInt(beat) * eighthNoteTime)
         }
         else {
           self.readSound(self.guitarPlain, time + parseInt(beat) * eighthNoteTime)
         }
+        beatIndex++
       })
     }
 
