@@ -119,7 +119,7 @@
       }
     }
 
-    // That where the buziness happens
+    // That's where the buziness happens
   , play: function() {
       var self = this
         , bar
