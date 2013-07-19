@@ -154,24 +154,24 @@
 
       // play riff
       this.riff.snare.forEach(function(beat) {
-        self.readSound(self.snare, time + parseInt(beat) * eighthNoteTime)
+        self.readSound(self.snare, time + parseInt(beat, 10) * eighthNoteTime)
       })
 
       this.riff.china.forEach(function(beat) {
-        self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
+        self.readSound(self.china, time + parseInt(beat, 10) * eighthNoteTime)
       })
 
       var beatIndex = 0
       this.riff.kick.forEach(function(beat) {
-        self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
+        self.readSound(self.kick, time + parseInt(beat, 10) * eighthNoteTime)
 
         // play mute / open guitar
         var mute = self.riff.guitar[beatIndex]
         if (mute) {
-          self.readSound(self.guitarMute, time + parseInt(beat) * eighthNoteTime)
+          self.readSound(self.guitarMute, time + parseInt(beat, 10) * eighthNoteTime)
         }
         else {
-          self.readSound(self.guitarPlain, time + parseInt(beat) * eighthNoteTime)
+          self.readSound(self.guitarPlain, time + parseInt(beat, 10) * eighthNoteTime)
         }
         beatIndex++
       })

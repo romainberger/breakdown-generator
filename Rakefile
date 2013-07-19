@@ -1,5 +1,7 @@
 # encoding: UTF-8
 
+task :default => [:jshint]
+
 task :build do
   puts 'Building Breakdown Generator'
   # copy and minify the source
