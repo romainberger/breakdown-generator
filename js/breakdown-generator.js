@@ -7,7 +7,7 @@
 
 !function() {
 
-  'use strict'
+  'use strict';
 
   var BreakdownGenerator = function(options) {
     this.context = false
@@ -59,7 +59,7 @@
 
     // Load a sample
   , loadSample: function(filename, cb) {
-      var request = new XMLHttpRequest
+      var request = new XMLHttpRequest()
       request.open('GET', '../samples/'+filename, true)
       request.responseType = 'arraybuffer'
       request.onload = function() {
@@ -129,7 +129,7 @@
       // or muted chords
       var self = this
       this.riff.kick.forEach(function(g) {
-        var mute = Math.random() < .9 ? true : false
+        var mute = Math.random() < 0.9 ? true : false
         if (mute) {
           self.riff.guitar.push(1)
         }
@@ -183,7 +183,7 @@
 
   , loadRiff: function(riff) {
       try {
-        var riff = JSON.parse(riff)
+        riff = JSON.parse(riff)
         this.riff = riff
       }
       catch(e) {
