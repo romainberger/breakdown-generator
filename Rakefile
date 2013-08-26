@@ -6,9 +6,9 @@ task :build do
   puts 'Building Breakdown Generator'
   # copy and minify the source
   `cp js/breakdown-generator.js dist/breakdown-generator.js`
-  # add header with credits and shit in minify version
   `uglifyjs dist/breakdown-generator.js -o dist/breakdown-generator.min.js`
 
+  # add header with credits and shit in minify version
   content = File.read('dist/breakdown-generator.min.js')
   File.open('dist/breakdown-generator.min.js', 'w') do |f|
     content = "/*! Breakdown Generator | https://github.com/romainberger/breakdown-generator */\n #{content}"
