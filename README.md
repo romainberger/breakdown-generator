@@ -10,53 +10,29 @@ When I am not coding, I am playing music. Like every developer I try to automate
 
 ### Installation
 
-Download the library and the samples or use your own samples. Your tree must be like this (you can change it easily by modifying the library):
+#### Quick install
 
-```
-    .
-    |-- js
-    |  |-- breakdown-generator.js
-    |-- samples
-    |  |-- drums
-    |  |  |-- kick.mp3
-    |  |  |-- snare.mp3
-    |  |  |-- china.mp3
-    |  |-- guitar
-    |  |  |-- mute.mp3
-    |  |  |-- plain.mp3
+To quickly get started you can clone the repo and use it as a base.
 
-```
+    # Clone the repo
+    $ git clone git@github.com:romainberger/breakdown-generator.git
+    $ cd breakdown-generator
 
-Include the library:
+    # Install the dependencies
+    $ npm install
 
-```
-    <script src="js/breakdown-generator.js"></script>
-```
+    # Then start the development server
+    $ grunt connect
 
-Then go crazy.
+You can then open your browser at the url [http://localhost:8000/](http://localhost:8000/) and do... whatever you want.
 
-```
-    var generator = new BreakdownGenerator
+#### New project
 
-    // init the generator
-    generator.init(function(err) {
-        if (err) {
-            // throw an error if the browser
-            // does not support the web audio API
-            console.log('Your browser sucks')
-            return
-        }
+To create a project from the beginning, you will need to add the library with a simple
 
-        // if everything is ok, place your code here
-        // Start by generating a riff
-        $.proxy(generator.generateRiff(), generator)
+    <script src="/js/breakdown-generator.js"></script>
 
-        // then play it
-        $.proxy(generator.play(), generator)
-    })
-```
-
-### Method
+### Methods
 
 ```
     // Generate a riff
@@ -76,6 +52,7 @@ Then go crazy.
 
 Some ideas that would be cool to implement:
 
+* export / import riff (json format) *work in progress*
 * mix console for volume of each instruments
 * record the audio to export
 * MIDI file of the riff
