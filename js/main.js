@@ -1,9 +1,9 @@
 
 !function() {
 
-  'use strict'
+  'use strict';
 
-  var generator  = new BreakdownGenerator
+  var generator  = new BreakdownGenerator()
     , playButton = document.querySelector('#play')
     , loading    = document.querySelector('#loading')
     , generateRiff = document.querySelector('#generate-riff')

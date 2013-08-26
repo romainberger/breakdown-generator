@@ -18,7 +18,11 @@ task :build do
 end
 
 task :jshint do
-  system "jshint js/breakdown-generator.js"
+  files = ['js/breakdown-generator.js', 'js/main.js']
+
+  files.each do |f|
+    system "jshint #{f}"
+  end
 end
 
 task :test do
