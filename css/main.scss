@@ -24,7 +24,6 @@ body {
     margin-top: 20px;
   }
 }
-
 .center {
     text-align: center;
 }
@@ -33,6 +32,15 @@ body {
 }
 .warning {
     color: #f33
+}
+
+/* Header */
+.jumbotron {
+    padding: 10px 0;
+
+    h1 {
+        font-size: 43px;
+    }
 }
 
 /* App */
