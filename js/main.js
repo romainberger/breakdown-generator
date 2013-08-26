@@ -11,6 +11,7 @@
     , tempoInput = document.querySelector('#tempo')
     , riffOutputWrapper = document.querySelector('#riff-output-wrapper')
     , riffOutput = document.querySelector('#riff-output')
+    , importRiff = document.querySelector('#import-riff')
 
   generator.init(function(err) {
     if (err) {
@@ -44,13 +45,13 @@
     getRiff.addEventListener('click', function() {
       var riff = generator.getJson.call(generator)
       riffOutput.textContent = riff
-      riffOutputWrapper.style.display = 'block'
     })
 
     // load a riff
-    // var riff = '{"snare":[2,6],"china":[0,2,4,6],"kick":[1,8,0,4,5,3,2]}'
-    // generator.loadRiff(riff)
-    // playButton.style.display = 'block'
+    importRiff.addEventListener('click', function() {
+      var riff = riffOutput.textContent
+      generator.loadRiff(riff)
+    })
 
   })
 
