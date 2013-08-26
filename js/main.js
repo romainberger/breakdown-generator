@@ -11,6 +11,7 @@
     , riffOutputWrapper = document.querySelector('#riff-output-wrapper')
     , riffOutput = document.querySelector('#riff-output')
     , importRiff = document.querySelector('#import-riff')
+    , importError = document.querySelector('#import-error')
 
   generator.init(function(err) {
     if (err) {
@@ -36,6 +37,8 @@
       // output the riff
       var riff = generator.getJson.call(generator)
       riffOutput.textContent = riff
+
+      importError.style.display = 'none'
     })
 
     // and play!
@@ -46,7 +49,15 @@
     // load a riff
     importRiff.addEventListener('click', function() {
       var riff = riffOutput.textContent
-      generator.loadRiff(riff)
+        , result = generator.loadRiff(riff)
+
+      if (result.error) {
+        importError.textContent = result.message
+        importError.style.display = 'block'
+      }
+      else {
+        importError.style.display = 'none'
+      }
     })
 
   })

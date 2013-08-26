@@ -197,7 +197,7 @@
         var result = {
             success: 0
           , error: 1
-          , message: 'Breakdown Geneator: Invalid riff format. You need to use a JSON object'
+          , message: 'Breakdown Geneator Error: Invalid riff format. You need to use a valid JSON string'
         }
       }
 
