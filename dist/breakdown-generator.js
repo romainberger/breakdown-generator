@@ -7,7 +7,7 @@
 
 !function() {
 
-  'use strict'
+  'use strict';
 
   var BreakdownGenerator = function(options) {
     this.context = false
@@ -21,9 +21,10 @@
     this.guitarPlain = 'guitar/plain.mp3'
 
     this.riff = {
-        snare: [2, 6]
-      , china: [0, 2, 4, 6]
-      , kick: []
+        snare:  [2, 6]
+      , china:  [0, 2, 4, 6]
+      , kick:   []
+      , guitar: []
     }
 
     options = typeof options == 'object' ? options : {}
@@ -58,7 +59,7 @@
 
     // Load a sample
   , loadSample: function(filename, cb) {
-      var request = new XMLHttpRequest
+      var request = new XMLHttpRequest()
       request.open('GET', '../samples/'+filename, true)
       request.responseType = 'arraybuffer'
       request.onload = function() {
@@ -67,14 +68,12 @@
       request.send()
     }
 
-    // Load the samples and store them
     // sooooo ugly
     // but I am lazy I'll refactor later
     // I promise (no pun intended)
   , loadSamples: function(cb) {
       var self = this
 
-      // CALLBACK HELL !!!
       self.loadSample(self.snare, function(sample) {
         self.snare = sample
 
@@ -110,6 +109,8 @@
   , generateRiff: function() {
       // remove previous datas
       this.riff.kick = []
+      this.riff.guitar = []
+
       // random kick
       var nbrOfKick = Math.floor(Math.random() * 12) + 4
       for (var i = 0; i < nbrOfKick; i++) {
@@ -119,9 +120,26 @@
           this.riff.kick.push(beat)
         }
       }
+      // sort the kick for pretty output
+      this.riff.kick.sort(function(a, b) {
+        return a - b
+      })
+
+      // for each kick determines if we play open
+      // or muted chords
+      var self = this
+      this.riff.kick.forEach(function(g) {
+        var mute = Math.random() < 0.9 ? true : false
+        if (mute) {
+          self.riff.guitar.push(1)
+        }
+        else {
+          self.riff.guitar.push(0)
+        }
+      })
     }
 
-    // That where the buziness happens
+    // That's where the buziness happens
   , play: function() {
       var self = this
         , bar
@@ -136,74 +154,45 @@
 
       // play riff
       this.riff.snare.forEach(function(beat) {
-        self.readSound(self.snare, time + parseInt(beat) * eighthNoteTime)
+        self.readSound(self.snare, time + parseInt(beat, 10) * eighthNoteTime)
       })
 
       this.riff.china.forEach(function(beat) {
-        self.readSound(self.china, time + parseInt(beat) * eighthNoteTime)
+        self.readSound(self.china, time + parseInt(beat, 10) * eighthNoteTime)
       })
 
-      // @todo use the playRandom() method
+      var beatIndex = 0
       this.riff.kick.forEach(function(beat) {
-         self.readSound(self.kick, time + parseInt(beat) * eighthNoteTime)
-      })
+        self.readSound(self.kick, time + parseInt(beat, 10) * eighthNoteTime)
 
-      return
-
-      // old stuff
-      for (bar = 0; bar < nbrOfBar; bar++) {
-        time = startTime + bar * 8 * eighthNoteTime
-
-        // the random kick / guitar stuff
-        // nevers plays on the first beat so we add
-        // it here. Sometimes.
-        var firstBeat = Math.random() > .5 ? true : false
-          , mute = Math.random() > .5 ? true : false
-        if (firstBeat) {
-          self.readSound(self.kick, 0)
-          if (mute) {
-            self.readSound(self.guitarMute, 0)
-          }
-          else {
-            self.readSound(self.guitarPlain, 0)
-          }
+        // play mute / open guitar
+        var mute = self.riff.guitar[beatIndex]
+        if (mute) {
+          self.readSound(self.guitarMute, time + parseInt(beat, 10) * eighthNoteTime)
         }
-
-        // Snare on beats 3, 7
-        self.readSound(self.snare, time + 2 * eighthNoteTime)
-        self.readSound(self.snare, time + 6 * eighthNoteTime)
-
-        // China everyfuckingwhere
-        self.readSound(self.china, time)
-        self.readSound(self.china, time + 2 * eighthNoteTime)
-        self.readSound(self.china, time + 4 * eighthNoteTime)
-        self.readSound(self.china, time + 6 * eighthNoteTime)
-      }
-
-    }
-
-    // play the kick and guitar samples
-  , playRandom: function() {
-      this.readSound(this.kick, 0)
-
-      // do we play the mute or plain version ?
-      var mute = Math.random() < .9 ? true : false
-      if (mute) {
-        this.readSound(this.guitarMute)
-      }
-      else {
-        this.readSound(this.guitarPlain)
-      }
+        else {
+          self.readSound(self.guitarPlain, time + parseInt(beat, 10) * eighthNoteTime)
+        }
+        beatIndex++
+      })
     }
 
   , getJson: function() {
-      var riff = JSON.stringify(this.riff)
-      console.log(riff)
-      // return riff
+      return JSON.stringify(this.riff)
+    }
+
+  , loadRiff: function(riff) {
+      try {
+        riff = JSON.parse(riff)
+        this.riff = riff
+      }
+      catch(e) {
+        console.error('Breakdown Geneator: Invalid riff format. You need to use a JSON object')
+        console.error(e)
+      }
     }
 
   }
-
 
   if (typeof window != 'undefined') {
     window.BreakdownGenerator = BreakdownGenerator
