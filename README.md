@@ -2,7 +2,7 @@
 
 When you mix the nerdiness of html5 and Djent, you get the Breakdown Generator.
 
-## What the fuck is that
+## What is this
 
 When I am not coding, I am playing music. Like every developer I try to automate everything I do more than twice, so naturally I tried to automate music writing. Turns out, it's not a good idea. Who knew ?
 
@@ -34,7 +34,6 @@ To create a project from the beginning, you will need to add the library with a 
 
 ### Methods
 
-```
     // Generate a riff
     generator.generateRiff()
 
@@ -46,13 +45,12 @@ To create a project from the beginning, you will need to add the library with a 
 
     // get the riff as JSON
     var riffJson = generator.getJson()
-```
 
 ## Improvements
 
 Some ideas that would be cool to implement:
 
-* export / import riff (json format) *work in progress*
+* export / import riff (json format) - *work in progress*
 * mix console for volume of each instruments
 * record the audio to export
 * MIDI file of the riff
