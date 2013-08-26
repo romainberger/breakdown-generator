@@ -5,38 +5,44 @@
 <!--[if gt IE 8]> <html class="no-js ie9"> <![endif]-->
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Breakdown Generator</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-    <header class="wrapper">
-        <h1 class="center">Breakdown Generator</h1>
-    </header>
+    <div class="wrap">
+        <header class="container">
+            <h1 class="center">Breakdown Generator</h1>
+        </header>
 
-    <div class="wrapper">
-        <p class="center">If a bunch monkeys can write some Shakspeare, I guess some javascript can compose some Meshuggah.</p>
-        <p class="center"><span class="warning">Warning</span>: The "music" you will hear will probably be the worst thing you've heard. This is some randomly generated notes and sometimes it goes nuts. But who knows, it may produce the best riff ever.</p>
+        <div class="container">
+            <p class="center">If a bunch monkeys can write some Shakspeare, I guess some javascript can compose some Meshuggah.</p>
+            <p class="center"><span class="warning">Warning</span>: The "music" you will hear will probably be the worst thing you've heard. This is some randomly generated notes and sometimes it goes nuts. But who knows, it may produce the best riff ever.</p>
 
-        <div id="app" class="app">
-            <p class="center"><label for="tempo">Tempo: </label><input id="tempo" type="text" value="80"></p>
-            <p class="center">
-                <span id="loading">Loading</span>
-                <span class="hidden">Playing...</span>
-                <button id="generate-riff" class="hidden">Generate a Riff</button>
-                <button id="play" class="hidden">Play</button>
-                <button id="get-riff" class="hidden">Get riff</button>
-            </p>
-        </div>
-        <div id="old-crap" class="hidden center old-crap">
-            <p>Your browser does not support the web audio api. <a href="http://google.com/chrome">Go get a real one then come back</a>.</p>
+            <div id="app" class="app">
+                <p class="center form-group">
+                    <label for="tempo">Tempo: </label>
+                    <input id="tempo" class="form-control tempo" type="text" value="80">
+                </p>
+                <p class="center" id="loading">Loading</p>
+                <p class="soft-hidden">Playing...</p>
+                <div class="app-buttons">
+                    <button id="generate-riff" class="soft-hidden btn btn-primary">Generate a Riff</button>
+                    <button id="play" class="soft-hidden btn btn-success">Play</button>
+                    <button id="get-riff" class="soft-hidden btn btn-default">Get riff</button>
+                </div>
+            </div>
+            <div id="old-crap" class="soft-hidden center old-crap">
+                <p>Your browser does not support the web audio api. <a href="http://google.com/chrome">Go get a real one then come back</a>.</p>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p class="disclaimer">This is just to play with the web audio API and is not an attempt at making fun of anybody</p>
-        <p class="credits">by <a href="http://romainberger.com">Romain Berger</a></p>
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted credit col-md-3 col-md-offset-9">by <a href="http://romainberger.com">Romain Berger</a></p>
+        </div>
     </footer>
 
     <script src="js/breakdown-generator.js"></script>

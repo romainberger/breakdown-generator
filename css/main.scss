@@ -1,71 +1,50 @@
 
+@import "bootstrap";
+
 /** Variables **/
 $wrapperWidth: 1000px;
 
-/** General **/
-* { zoom: 1}
-html {
-    font-size: 100%;
-}
+/* General */
+html,
 body {
-    padding: 0;
-    margin: 0;
-    font-family: Helvetica, sans-serif;
-    line-height: 1.4;
-    background: #efefef;
+    height: 100%;
 }
+.wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+.footer {
+  height: 60px;
+  background-color: #f5f5f5;
 
-.wrapper {
-    width: $wrapperWidth;
-    margin: 0 auto;
+  .credit {
+    margin-top: 20px;
+  }
 }
 
 .center {
-    text-align: center
+    text-align: center;
 }
-.hidden {
+.soft-hidden {
     display: none;
 }
 .warning {
     color: #f33
 }
 
-/** App **/
-.app {
-    margin-top: 50px;
-}
-button {
-    display: block;
-    width: 150px;
-    height: 25px;
-    margin: 0 auto 20px auto;
-    border: 0;
-    color: #fff;
-    background: #999;
-    cursor: pointer;
-    font-family: inherit;
-    text-transform: uppercase;
-}
-button:hover {
-    background: #222
-}
-
-
+/* App */
 .old-crap {
     margin-top: 70px;
     font-size: 20px;
 }
-
-/** Footer **/
-footer {
-    width: $wrapperWidth;
-    margin: 200px auto 0 auto;
+.tempo {
+    width: 120px;
+    margin: 0 auto;
+    text-align: center;
 }
-.disclaimer {
-    width: 200px;
-    float: left;
-    font-size: 12px;
-}
-.credits {
-    float: right;
+.app-buttons button {
+    margin: 10px auto;
 }
