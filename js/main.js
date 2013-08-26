@@ -9,6 +9,8 @@
     , generateRiff = document.querySelector('#generate-riff')
     , getRiff = document.querySelector('#get-riff')
     , tempoInput = document.querySelector('#tempo')
+    , riffOutputWrapper = document.querySelector('#riff-output-wrapper')
+    , riffOutput = document.querySelector('#riff-output')
 
   generator.init(function(err) {
     if (err) {
@@ -40,7 +42,9 @@
 
     // get the riff as json
     getRiff.addEventListener('click', function() {
-      console.log(generator.getJson.call(generator))
+      var riff = generator.getJson.call(generator)
+      riffOutput.textContent = riff
+      riffOutputWrapper.style.display = 'block'
     })
 
     // load a riff
