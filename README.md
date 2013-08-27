@@ -34,6 +34,19 @@ To create a project from the beginning, you will need to add the library with a 
 
 ### Methods
 
+#### Initialization
+
+    // Basic initialization
+    var generator  = new BreakdownGenerator()
+
+    // You can set a few options while calling the constructor
+    var generator  = new BreakdownGenerator({
+        tempo: 120
+      , samplePath: 'path/to/samples/' // path to the samples. MUST end with a trailing slash. default to '../samples/'
+    })
+
+#### Have fun
+
     // Generate a riff
     generator.generateRiff()
 
