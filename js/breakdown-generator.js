@@ -29,6 +29,7 @@
 
     options = typeof options == 'object' ? options : {}
     this.tempo = options.tempo || 100
+    this.samplePath = options.samplePath || '../samples/'
   }
 
   BreakdownGenerator.prototype = {
@@ -60,7 +61,7 @@
     // Load a sample
   , loadSample: function(filename, cb) {
       var request = new XMLHttpRequest()
-      request.open('GET', '../samples/'+filename, true)
+      request.open('GET', this.samplePath+filename, true)
       request.responseType = 'arraybuffer'
       request.onload = function() {
         cb(request.response)
