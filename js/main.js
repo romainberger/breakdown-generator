@@ -1,16 +1,17 @@
 
 !function() {
 
-  'use strict'
+  'use strict';
 
-  var generator  = new BreakdownGenerator
+  var generator  = new BreakdownGenerator()
     , playButton = document.querySelector('#play')
     , loading    = document.querySelector('#loading')
     , generateRiff = document.querySelector('#generate-riff')
-    , getRiff = document.querySelector('#get-riff')
     , tempoInput = document.querySelector('#tempo')
     , riffOutputWrapper = document.querySelector('#riff-output-wrapper')
     , riffOutput = document.querySelector('#riff-output')
+    , importRiff = document.querySelector('#import-riff')
+    , importError = document.querySelector('#import-error')
 
   generator.init(function(err) {
     if (err) {
@@ -31,8 +32,13 @@
     // generate riff
     generateRiff.addEventListener('click', function() {
       playButton.style.display = 'block'
-      getRiff.style.display = 'block'
       generator.generateRiff.call(generator)
+
+      // output the riff
+      var riff = generator.getJson.call(generator)
+      riffOutput.textContent = riff
+
+      importError.style.display = 'none'
     })
 
     // and play!
@@ -40,17 +46,19 @@
       generator.play.call(generator)
     })
 
-    // get the riff as json
-    getRiff.addEventListener('click', function() {
-      var riff = generator.getJson.call(generator)
-      riffOutput.textContent = riff
-      riffOutputWrapper.style.display = 'block'
-    })
-
     // load a riff
-    // var riff = '{"snare":[2,6],"china":[0,2,4,6],"kick":[1,8,0,4,5,3,2]}'
-    // generator.loadRiff(riff)
-    // playButton.style.display = 'block'
+    importRiff.addEventListener('click', function() {
+      var riff = riffOutput.textContent
+        , result = generator.loadRiff(riff)
+
+      if (result.error) {
+        importError.textContent = result.message
+        importError.style.display = 'block'
+      }
+      else {
+        importError.style.display = 'none'
+      }
+    })
 
   })
 

@@ -31,11 +31,13 @@
                     <div class="app-buttons col-md-2 col-md-offset-5">
                         <button id="generate-riff" class="soft-hidden btn btn-primary">Generate a Riff</button>
                         <button id="play" class="soft-hidden btn btn-success">Play</button>
-                        <button id="get-riff" class="soft-hidden btn btn-default">Get riff</button>
                     </div>
                 </div>
-                <div class="soft-hidden riff-output-wrapper" id="riff-output-wrapper">
-                    <pre id="riff-output"></pre>
+                <div class="riff-output-wrapper" id="riff-output-wrapper">
+                    <h4>Riff</h4>
+                    <p id="import-error" class="soft-hidden bs-callout bs-callout-danger"></p>
+                    <pre id="riff-output" contenteditable="true"></pre>
+                    <p><button id="import-riff" class="btn btn-default">Import riff</button> Edit or paste a JSON string then hit "Import riff". Generate a riff to see an example of valid riff format.</p>
                 </div>
             </div>
             <div id="old-crap" class="soft-hidden center old-crap">
