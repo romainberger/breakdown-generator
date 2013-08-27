@@ -182,15 +182,27 @@
       return JSON.stringify(this.riff)
     }
 
+    /**
+     * Loads a riff from a string
+     * Must be in json format
+     *
+     * @returns object with status and message
+     */
   , loadRiff: function(riff) {
       try {
         riff = JSON.parse(riff)
         this.riff = riff
+        var result = {success: 1, error: 0}
       }
       catch(e) {
-        console.error('Breakdown Geneator: Invalid riff format. You need to use a JSON object')
-        console.error(e)
+        var result = {
+            success: 0
+          , error: 1
+          , message: 'Breakdown Geneator Error: Invalid riff format. You need to use a valid JSON string'
+        }
       }
+
+      return result
     }
 
   }
