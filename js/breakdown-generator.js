@@ -207,8 +207,21 @@
 
   }
 
+  // export for front-end
   if (typeof window != 'undefined') {
-    window.BreakdownGenerator = BreakdownGenerator
+    if (window.BreakdownGenerator) {
+      for (var prop in BreakdownGenerator) {
+        window.BreakdownGenerator[prop] = BreakdownGenerator[prop]
+      }
+    }
+    else {
+      window.BreakdownGenerator = BreakdownGenerator
+    }
+  }
+
+  // export as module for node.js
+  if (typeof module != 'undefined' && module.exports) {
+    module.exports = BreakdownGenerator
   }
 
 }();
