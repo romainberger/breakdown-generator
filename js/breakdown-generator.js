@@ -35,19 +35,44 @@
   BreakdownGenerator.prototype = {
 
     /**
+     * Check if we're in nodejs
+     * not 100% reliable but that's all we got
+     *
+     * @return boolean
+     */
+    isNode: function() {
+      return typeof module !== 'undefined' && module.exports
+    }
+
+    /**
+     * Check if we're in a browser
+     *
+     * @return boolean
+     */
+  , isBrowser: function() {
+      return typeof window !== 'undefined'
+    }
+
+    /**
      * Creates the audio context
      *
      * @param {function} cb - Callback function
      */
-    init: function(cb) {
-      if (typeof AudioContext !== 'undefined') {
+  , init: function(cb) {
+      if (this.isBrowser()) {
+        if (typeof AudioContext !== 'undefined') {
+          this.context = new AudioContext()
+        }
+        else if (typeof webkitAudioContext !== 'undefined') {
+          this.context = new webkitAudioContext()
+        }
+        else {
+          return cb(true)
+        }
+      }
+      else if (this.isNode()) {
+        var AudioContext = require('web-audio-api').AudioContext
         this.context = new AudioContext()
-      }
-      else if (typeof webkitAudioContext !== 'undefined') {
-        this.context = new webkitAudioContext()
-      }
-      else {
-        return cb(true)
       }
 
       this.context && this.loadSamples(cb)
