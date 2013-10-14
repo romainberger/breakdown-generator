@@ -74,3 +74,15 @@ code {
     background-color: #fcf2f2;
     border-color: #dFb5b4;
 }
+
+/* Graph */
+.riff-graph th,
+.riff-graph td {
+    width: 40px;
+    padding: 10px;
+    border: 1px solid #B3B3B3;
+
+    &.filled {
+        background: #428bca;
+    }
+}
