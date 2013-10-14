@@ -26,5 +26,5 @@ task :jshint do
 end
 
 task :test do
-  # @todo
+  system "mocha"
 end
