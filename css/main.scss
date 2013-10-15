@@ -3,6 +3,7 @@
 
 /** Variables **/
 $wrapperWidth: 1000px;
+$blue: #428bca;
 
 /* General */
 html,
@@ -83,6 +84,13 @@ code {
     border: 1px solid #B3B3B3;
 
     &.filled {
-        background: #428bca;
+        background: $blue;
+
+        &.mute {
+            background: darken($blue, 15%);
+        }
+        &.plain {
+            background: lighten($blue, 15%);
+        }
     }
 }
