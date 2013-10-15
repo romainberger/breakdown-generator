@@ -55,14 +55,22 @@
        * Generate the guitar's graph
        */
     , drawGuitar: function() {
-        var self = this
-          , html = ''
+        var self  = this
+          , html  = ''
+          , index = 0
 
         for (var i = 0; i < 8; i++) {
           html += '<td'
           // the guitar follows the kick pattern so we check with it
           if (self.riff.kick.indexOf(i) != -1) {
-            html += ' class="filled"'
+            html += ' class="filled'
+            if (self.riff.guitar[index] === 1) {
+              html += ' mute"'
+            }
+            else {
+              html += ' plain"'
+            }
+            index++
           }
           html += '></td>'
         }
