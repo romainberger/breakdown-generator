@@ -61,7 +61,7 @@
         for (var i = 0; i < 8; i++) {
           html += '<td'
           // the guitar follows the kick pattern so we check with it
-          if (self.riff.kick.indexOf(i) != 1) {
+          if (self.riff.kick.indexOf(i) != -1) {
             html += ' class="filled"'
           }
           html += '></td>'
