@@ -65,7 +65,7 @@ To create a project from the beginning, you will need to add the library with a 
 
 Some ideas that would be cool to implement:
 
-* export / import riff (json format) - *work in progress*
+* Graph of the riff *work in progress*
 * mix console for volume of each instruments
 * record the audio to export
 * MIDI file of the riff
