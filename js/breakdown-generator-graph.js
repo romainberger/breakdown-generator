@@ -5,6 +5,7 @@
 
   /**
    * Breakdown Generator Graph constructor
+   * @todo use only a div id and generate the whole table
    *
    * @param string table - Id of the element
    */
@@ -95,7 +96,13 @@
        * @param function cb - Callback function
        */
     , watch: function(cb) {
-        // do sthi
+        this.table.addEventListener('click', function(e) {
+          var tag = e.target.tagName.toLowerCase()
+
+          if (tag === 'td') {
+            // do shit
+          }
+        }, false)
       }
 
   }
