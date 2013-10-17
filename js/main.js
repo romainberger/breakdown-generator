@@ -61,9 +61,16 @@
       }
       else {
         importError.style.display = 'none'
+
+        // update graph
+        var riff = generator.getJson()
+        riffOutput.textContent = riff
+        graph.draw(riff)
       }
     })
 
+    // riff modification via the graph
+    graph.watch()
   })
 
 }();

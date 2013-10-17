@@ -89,6 +89,15 @@
         })
       }
 
+      /**
+       * Watch for changes in the table to regenerate a modified riff
+       *
+       * @param function cb - Callback function
+       */
+    , watch: function(cb) {
+        // do sthi
+      }
+
   }
 
   // export for front-end
