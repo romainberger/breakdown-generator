@@ -54,9 +54,15 @@ body {
     margin: 0 auto;
     text-align: center;
 }
-.app-buttons button {
-    width: 100%;
-    margin: 10px 0;
+.app-buttons {
+    p {
+        min-height: 33px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
 
 .riff-output-wrapper {
