@@ -32,10 +32,19 @@ task :build do
   system "uglifyjs dist/breakdown-generator-#{version}.js -o dist/breakdown-generator-#{version}.min.js"
   system "uglifyjs dist/breakdown-generator-graph-#{version}.js -o dist/breakdown-generator-graph-#{version}.min.js"
 
+  # add version to uncompressed files
+  Dir["dist/*-#{version}.js"].each do |filename|
+    content = File.read(filename)
+    File.open(filename, "w") do |f|
+      content = content.gsub("<%= version %>", version)
+      f.write(content)
+    end
+  end
+
   # add header with credits and version to minified
   Dir["dist/*.min.js"].each do |filename|
     content = File.read(filename)
-    File.open(filename, 'w') do |f|
+    File.open(filename, "w") do |f|
       content = "/*! Breakdown Generator #{version} | https://github.com/romainberger/breakdown-generator */\n #{content}"
       f.write(content)
     end

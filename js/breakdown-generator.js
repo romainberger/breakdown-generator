@@ -3,6 +3,7 @@
  * https://github.com/romainberger/breakdown-generator
  *
  * @author Romain Berger <romain@romainberger.com>
+ * @version <%= version %>
  */
 
 !function() {
