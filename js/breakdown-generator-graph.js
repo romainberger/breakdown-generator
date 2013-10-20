@@ -1,5 +1,5 @@
 /**
- * Breakdown Generator
+ * Breakdown Generator Graph
  * https://github.com/romainberger/breakdown-generator
  *
  * @author Romain Berger <romain@romainberger.com>

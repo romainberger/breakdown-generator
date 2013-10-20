@@ -30,7 +30,7 @@ You can then open your browser at the url [http://localhost:8000/](http://localh
 
 #### New project
 
-To create a project from the beginning, you will need to add the library with a simple script tag.
+To create a project from the beginning, you will need to add the library with a simple script tag. You will find in the `dist` folder the built and minified versions of the libraries.
 
     <script src="/js/breakdown-generator.js"></script>
 
