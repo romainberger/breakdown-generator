@@ -5,27 +5,45 @@
 
   /**
    * Breakdown Generator Graph constructor
-   * @todo use only a div id and generate the whole table
    *
    * @param string table - Id of the element
    */
   var BreakdownGeneratorGraph = function(table) {
-    this.table  = document.querySelector(table)
-    this.china  = this.table.querySelector('#china')
-    this.snare  = this.table.querySelector('#snare')
-    this.kick   = this.table.querySelector('#kick')
-    this.guitar = this.table.querySelector('#guitar')
+    this.table = document.querySelector(table)
+    this.instruments = ['snare', 'china', 'kick']
     this.riff
-    this.instruments    = ['snare', 'china', 'kick']
-    this.allInstruments = [this.china, this.snare, this.kick, this.guitar]
+
+    this.init()
   }
 
   BreakdownGeneratorGraph.prototype = {
 
       /**
+       * Creates the necessary markup
+       */
+      init: function() {
+        var html = [
+            '<table border="0" cellpadding="0" cellspacing="0">'
+          , '<tr id="china"><th>Cymbal</th></tr>'
+          , '<tr id="snare"><th>Snare</th></tr>'
+          , '<tr id="kick"><th>Kick</th></tr>'
+          , '<tr id="guitar"><th>Guitar</th></tr>'
+          , '</table>'
+        ].join('')
+
+        this.table.innerHTML = html
+
+        this.china  = this.table.querySelector('#china')
+        this.snare  = this.table.querySelector('#snare')
+        this.kick   = this.table.querySelector('#kick')
+        this.guitar = this.table.querySelector('#guitar')
+        this.allInstruments = [this.china, this.snare, this.kick, this.guitar]
+      }
+
+      /**
        * @param string riff - json string
        */
-      draw: function(riff) {
+    , draw: function(riff) {
         this.riff = JSON.parse(riff)
         this.empty()
         this.drawGuitar()
