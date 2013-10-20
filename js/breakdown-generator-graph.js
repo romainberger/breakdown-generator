@@ -122,13 +122,61 @@
        * @param function cb - Callback function
        */
     , watch: function(cb) {
+        var self = this
         this.table.addEventListener('click', function(e) {
-          var tag = e.target.tagName.toLowerCase()
+          var target = e.target
+            , tag    = target.tagName.toLowerCase()
 
           if (tag === 'td') {
-            // do shit
+            var index = target.dataset.index
+
+            if (self.hasClass(target, 'filled')) {
+              self.removeClass(target, 'filled')
+            }
+            else {
+              self.addClass(target, 'filled')
+            }
           }
         }, false)
+      }
+
+      /**
+       * Returns if an element as a given class
+       *
+       * @param DOM element element
+       * @param string className
+       * @return boolean
+       */
+    , hasClass: function(element, className) {
+        var classes = element.className.split(' ')
+        return classes.indexOf(className) !== -1
+      }
+
+      /**
+       * Adds a class to an element
+       *
+       * @param DOM element element
+       * @param string className
+       */
+    , addClass: function(element, className) {
+        if (!this.hasClass(element, className)) {
+          var classes = element.className.split(' ')
+          classes.push(className)
+          element.className = classes.join(' ')
+        }
+      }
+
+      /**
+       * Remove a class from an element
+       *
+       * @param Dom element element
+       * @param string className
+       */
+    , removeClass: function(element, className) {
+        if (this.hasClass(element, className)) {
+          var classes = element.className.replace(className, '')
+          element.className = classes
+        }
       }
 
   }
