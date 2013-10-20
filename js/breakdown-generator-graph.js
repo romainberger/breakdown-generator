@@ -99,7 +99,7 @@
             }
             index++
           }
-          html += ' data-index="'+i+'"></td>'
+          html += ' data-index="'+i+'" data-guitar="true"></td>'
         }
 
         self.guitar.insertAdjacentHTML('beforeend', html)
@@ -128,14 +128,24 @@
             , tag    = target.tagName.toLowerCase()
 
           if (tag === 'td') {
-            var index = target.dataset.index
+            var datas  = target.dataset
+              , index  = datas.index
+              , guitar = datas.guitar === 'true' ? true : false
 
-            if (self.hasClass(target, 'filled')) {
-              self.removeClass(target, 'filled')
+            // @todo adapt for guitar
+            if (guitar) {
+              console.log('guitar')
             }
             else {
-              self.addClass(target, 'filled')
+              if (self.hasClass(target, 'filled')) {
+                self.removeClass(target, 'filled')
+              }
+              else {
+                self.addClass(target, 'filled')
+              }
             }
+
+            self.parseGraph()
           }
         }, false)
       }
@@ -177,6 +187,13 @@
           var classes = element.className.replace(className, '')
           element.className = classes
         }
+      }
+
+      /**
+       * Parse the graph to get the corresponding json
+       */
+    , parseGraph: function() {
+        // @todo
       }
 
   }
