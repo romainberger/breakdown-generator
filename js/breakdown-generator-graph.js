@@ -13,10 +13,10 @@
   /**
    * Breakdown Generator Graph constructor
    *
-   * @param string table - Id of the element
+   * @param string element - Id of the element
    */
-  var BreakdownGeneratorGraph = function(table) {
-    this.table = document.querySelector(table)
+  var BreakdownGeneratorGraph = function(element) {
+    this.element = document.querySelector(element)
     this.instruments = ['snare', 'china', 'kick']
     this.riff
 
@@ -38,8 +38,9 @@
           , '</table>'
         ].join('')
 
-        this.table.innerHTML = html
+        this.element.innerHTML = html
 
+        this.table  = this.element.querySelector('table')
         this.china  = this.table.querySelector('#china')
         this.snare  = this.table.querySelector('#snare')
         this.kick   = this.table.querySelector('#kick')
@@ -70,7 +71,7 @@
             if (self.riff[instrument].indexOf(i) != -1) {
               html += ' class="filled"'
             }
-            html += '></td>'
+            html += ' data-index="'+i+'"></td>'
           }
 
           self[instrument].insertAdjacentHTML('beforeend', html)
@@ -98,7 +99,7 @@
             }
             index++
           }
-          html += '></td>'
+          html += ' data-index="'+i+'"></td>'
         }
 
         self.guitar.insertAdjacentHTML('beforeend', html)
