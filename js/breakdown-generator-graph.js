@@ -134,7 +134,20 @@
 
             // @todo adapt for guitar
             if (guitar) {
-              console.log('guitar')
+              if (self.hasClass(target, 'filled')) {
+                if (self.hasClass(target, 'mute')) {
+                  self.removeClass(target, 'mute')
+                  self.addClass(target, 'plain')
+                }
+                else if (self.hasClass(target, 'plain')) {
+                  self.removeClass(target, 'plain')
+                  self.removeClass(target, 'filled')
+                }
+              }
+              else {
+                self.addClass(target, 'filled')
+                self.addClass(target, 'mute')
+              }
             }
             else {
               if (self.hasClass(target, 'filled')) {
