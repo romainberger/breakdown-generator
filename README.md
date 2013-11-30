@@ -74,13 +74,13 @@ To create a project from the beginning, you will need to add the library with a 
 
 To see examples of every methods take a look inside [main.js](https://github.com/romainberger/breakdown-generator/blob/master/js/main.js).
 
-#### Graph
+## Graph
 
 Editing a riff with a json is kinda nerdy. Clicking on stuff is way easier. So you can generate a graph of you riff and edit it. To do so, include the `breakdown-generate-graph.js` file:
 
     <script src="/js/breakdown-generator-graph.js"></script>
 
-You then have a bunch of method to poke around:
+You then have a bunch of methods to poke around:
 
     // Create the graph
     // It uses an id as parameter, pointing to an empty div or whatever you want

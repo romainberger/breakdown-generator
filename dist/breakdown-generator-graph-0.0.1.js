@@ -1,9 +1,9 @@
 /**
- * Breakdown Generator Graph
+ * Breakdown Generator
  * https://github.com/romainberger/breakdown-generator
  *
  * @author Romain Berger <romain@romainberger.com>
- * @version <%= version %>
+ * @version 0.0.1
  */
 
 !function() {
@@ -13,10 +13,10 @@
   /**
    * Breakdown Generator Graph constructor
    *
-   * @param string element - Id of the element
+   * @param string table - Id of the element
    */
-  var BreakdownGeneratorGraph = function(element) {
-    this.element = document.querySelector(element)
+  var BreakdownGeneratorGraph = function(table) {
+    this.table = document.querySelector(table)
     this.instruments = ['snare', 'china', 'kick']
     this.riff
 
@@ -38,9 +38,8 @@
           , '</table>'
         ].join('')
 
-        this.element.innerHTML = html
+        this.table.innerHTML = html
 
-        this.table  = this.element.querySelector('table')
         this.china  = this.table.querySelector('#china')
         this.snare  = this.table.querySelector('#snare')
         this.kick   = this.table.querySelector('#kick')
@@ -71,7 +70,7 @@
             if (self.riff[instrument].indexOf(i) != -1) {
               html += ' class="filled"'
             }
-            html += ' data-index="'+i+'"></td>'
+            html += '></td>'
           }
 
           self[instrument].insertAdjacentHTML('beforeend', html)
@@ -99,7 +98,7 @@
             }
             index++
           }
-          html += ' data-index="'+i+'" data-guitar="true"></td>'
+          html += '></td>'
         }
 
         self.guitar.insertAdjacentHTML('beforeend', html)
@@ -122,90 +121,13 @@
        * @param function cb - Callback function
        */
     , watch: function(cb) {
-        var self = this
         this.table.addEventListener('click', function(e) {
-          var target = e.target
-            , tag    = target.tagName.toLowerCase()
+          var tag = e.target.tagName.toLowerCase()
 
           if (tag === 'td') {
-            var datas  = target.dataset
-              , index  = datas.index
-              , guitar = datas.guitar === 'true' ? true : false
-
-            if (guitar) {
-              if (self.hasClass(target, 'filled')) {
-                if (self.hasClass(target, 'mute')) {
-                  self.removeClass(target, 'mute')
-                  self.addClass(target, 'plain')
-                }
-                else if (self.hasClass(target, 'plain')) {
-                  self.removeClass(target, 'plain')
-                  self.removeClass(target, 'filled')
-                }
-              }
-              else {
-                self.addClass(target, 'filled')
-                self.addClass(target, 'mute')
-              }
-            }
-            else {
-              if (self.hasClass(target, 'filled')) {
-                self.removeClass(target, 'filled')
-              }
-              else {
-                self.addClass(target, 'filled')
-              }
-            }
-
-            self.parseGraph()
+            // do shit
           }
         }, false)
-      }
-
-      /**
-       * Returns if an element as a given class
-       *
-       * @param DOM element element
-       * @param string className
-       * @return boolean
-       */
-    , hasClass: function(element, className) {
-        var classes = element.className.split(' ')
-        return classes.indexOf(className) !== -1
-      }
-
-      /**
-       * Adds a class to an element
-       *
-       * @param DOM element element
-       * @param string className
-       */
-    , addClass: function(element, className) {
-        if (!this.hasClass(element, className)) {
-          var classes = element.className.split(' ')
-          classes.push(className)
-          element.className = classes.join(' ')
-        }
-      }
-
-      /**
-       * Remove a class from an element
-       *
-       * @param Dom element element
-       * @param string className
-       */
-    , removeClass: function(element, className) {
-        if (this.hasClass(element, className)) {
-          var classes = element.className.replace(className, '')
-          element.className = classes
-        }
-      }
-
-      /**
-       * Parse the graph to get the corresponding json
-       */
-    , parseGraph: function() {
-        // @todo
       }
 
   }
