@@ -3,6 +3,7 @@
 
 /** Variables **/
 $wrapperWidth: 1000px;
+$blue: #428bca;
 
 /* General */
 html,
@@ -53,9 +54,15 @@ body {
     margin: 0 auto;
     text-align: center;
 }
-.app-buttons button {
-    width: 100%;
-    margin: 10px 0;
+.app-buttons {
+    p {
+        min-height: 33px;
+    }
+
+    button {
+        width: 100%;
+        margin: 10px 0;
+    }
 }
 
 .riff-output-wrapper {
@@ -73,4 +80,26 @@ code {
 .bs-callout-danger {
     background-color: #fcf2f2;
     border-color: #dFb5b4;
+}
+
+/* Graph */
+.riff-graph th,
+.riff-graph td {
+    width: 40px;
+    padding: 10px;
+    border: 1px solid #B3B3B3;
+
+    &.filled {
+        background: $blue;
+
+        &.mute {
+            background: darken($blue, 15%);
+        }
+        &.plain {
+            background: lighten($blue, 15%);
+        }
+    }
+}
+.riff-graph td {
+    cursor: pointer
 }

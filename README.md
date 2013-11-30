@@ -30,7 +30,7 @@ You can then open your browser at the url [http://localhost:8000/](http://localh
 
 #### New project
 
-To create a project from the beginning, you will need to add the library with a simple
+To create a project from the beginning, you will need to add the library with a simple script tag. You will find in the `dist` folder the built and minified versions of the libraries.
 
     <script src="/js/breakdown-generator.js"></script>
 
@@ -47,6 +47,17 @@ To create a project from the beginning, you will need to add the library with a 
       , samplePath: 'path/to/samples/' // path to the samples. MUST end with a trailing slash. default to '../samples/'
     })
 
+    // Call the init method to get started, you can then use then generator
+    // be sure to use the callback function to be sure the samples are loaded
+    generator.init(function(err) {
+        if (err) {
+            // something went wrong...
+            return
+        }
+
+        // Place all your code using the generator here
+    })
+
 #### Have fun
 
     // Generate a riff
@@ -60,6 +71,29 @@ To create a project from the beginning, you will need to add the library with a 
 
     // get the riff as JSON
     var riffJson = generator.getJson()
+
+To see examples of every methods take a look inside [main.js](https://github.com/romainberger/breakdown-generator/blob/master/js/main.js).
+
+## Graph
+
+Editing a riff with a json is kinda nerdy. Clicking on stuff is way easier. So you can generate a graph of you riff and edit it. To do so, include the `breakdown-generate-graph.js` file:
+
+    <script src="/js/breakdown-generator-graph.js"></script>
+
+You then have a bunch of methods to poke around:
+
+    // Create the graph
+    // It uses an id as parameter, pointing to an empty div or whatever you want
+    var graph = new BreakdownGenerateGraph('#riff-graph')
+
+    // Generate the graph from a riff's json
+    var riff = generator.getJson()
+    graph.draw(riff)
+
+    // To automatically edit the riff by clicking on the graph, call the watch method
+    graph.watch()
+
+Once again, every methods are used in [main.js](https://github.com/romainberger/breakdown-generator/blob/master/js/main.js) if you want to see working examples.
 
 ## Improvements
 

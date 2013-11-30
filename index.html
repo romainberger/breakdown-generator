@@ -29,10 +29,13 @@
                 <p class="soft-hidden">Playing...</p>
                 <div class="row">
                     <div class="app-buttons col-md-2 col-md-offset-5">
-                        <button id="generate-riff" class="soft-hidden btn btn-primary">Generate a Riff</button>
-                        <button id="play" class="soft-hidden btn btn-success">Play</button>
+                        <p><button id="generate-riff" class="soft-hidden btn btn-primary">Generate a Riff</button></p>
+                        <p><button id="play" class="soft-hidden btn btn-success">Play</button></p>
                     </div>
                 </div>
+
+                <div class="riff-graph" id="riff-graph"></div>
+
                 <div class="riff-output-wrapper" id="riff-output-wrapper">
                     <h4>Riff</h4>
                     <p id="import-error" class="soft-hidden bs-callout bs-callout-danger"></p>
@@ -54,6 +57,7 @@
     </footer>
 
     <script src="js/breakdown-generator.js"></script>
+    <script src="js/breakdown-generator-graph.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
