@@ -29,7 +29,7 @@
 
     options = typeof options == 'object' ? options : {}
     this.tempo = options.tempo || 100
-    this.samplePath = options.samplePath || '../samples/'
+    this.samplePath = options.samplePath || 'samples/'
   }
 
   BreakdownGenerator.prototype = {
@@ -79,13 +79,12 @@
   , loadSample: function(filename, cb) {
       var request = new XMLHttpRequest()
         , self = this
-      request.open('GET', this.samplePath+filename, true)
+      request.open('GET', this.samplePath + filename, true)
       request.responseType = 'arraybuffer'
       request.onload = function() {
         self.context.decodeAudioData(request.response, function(buffer) {
-           cb(buffer);
-         });
-         // cb(request.response)
+           cb(buffer)
+         })
       }
       request.send()
     }
@@ -132,7 +131,7 @@
       sound.buffer = sample
       sound.connect(this.context.destination)
       if (!sound.start) {
-        sound.start = sound.noteOn;
+        sound.start = sound.noteOn
       }
       sound.start(time)
     }
