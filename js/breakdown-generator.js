@@ -78,10 +78,14 @@
      */
   , loadSample: function(filename, cb) {
       var request = new XMLHttpRequest()
+        , self = this
       request.open('GET', this.samplePath+filename, true)
       request.responseType = 'arraybuffer'
       request.onload = function() {
-        cb(request.response)
+        self.context.decodeAudioData(request.response, function(buffer) {
+           cb(buffer);
+         });
+         // cb(request.response)
       }
       request.send()
     }
@@ -125,10 +129,12 @@
      */
   , readSound: function(sample, time) {
       var sound = this.context.createBufferSource()
-        , soundBuffer = this.context.createBuffer(sample, false)
-      sound.buffer = soundBuffer
+      sound.buffer = sample
       sound.connect(this.context.destination)
-      sound.noteOn(time)
+      if (!sound.start) {
+        sound.start = sound.noteOn;
+      }
+      sound.start(time)
     }
 
     /**

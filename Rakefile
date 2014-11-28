@@ -6,7 +6,7 @@ task :build do
   puts 'Building Breakdown Generator'
   # copy and minify the source
   `cp js/breakdown-generator.js dist/breakdown-generator.js`
-  `uglifyjs dist/breakdown-generator.js -o dist/breakdown-generator.min.js`
+  `./node_modules/.bin/uglifyjs dist/breakdown-generator.js -o dist/breakdown-generator.min.js`
 
   # add header with credits and shit in minify version
   content = File.read('dist/breakdown-generator.min.js')

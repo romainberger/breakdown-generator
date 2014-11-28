@@ -13,12 +13,13 @@
     "url": "https://github.com/romainberger/breakdown-generator.git"
   },
   "bugs": {
-    "url" : "https://github.com/romainberger/breakdown-generator/issues",
-    "email" : "romain@romainberger.com"
+    "url": "https://github.com/romainberger/breakdown-generator/issues",
+    "email": "romain@romainberger.com"
   },
   "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-connect": "~0.3.0"
+    "grunt-contrib-connect": "~0.3.0",
+    "uglify-js": "^2.4.15"
   }
 }
