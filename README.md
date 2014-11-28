@@ -2,8 +2,6 @@
 
 When you mix the nerdiness of html5 and Djent, you get the Breakdown Generator.
 
-Demo: [http://romainberger.com/lab/breakdown-generator](http://romainberger.com/lab/breakdown-generator)
-
 ## What is this
 
 When I am not coding, I am playing music. Like every developer I try to automate everything I do more than twice, so naturally I tried to automate music writing. Turns out, it's not a good idea. Who knew ?
